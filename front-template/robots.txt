@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://xpertservicebd.com/sitemap.xml
+
+# Disallow admin paths
+Disallow: /admin/
