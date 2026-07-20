@@ -1,10 +1,12 @@
 @extends('front.master')
 
-@section('title', 'Xpert Service BD | AC Service & Repair in Mirpur | Home Appliance Repair')
-@section('meta_description', 'Xpert Service BD – পেশাদার AC সার্ভিস, রিপেয়ার ও হোম অ্যাপ্লায়েন্স মেরামত সেবা মিরপুরে। AC Repair, Servicing, Installation, Gas Refill, Washing Machine, Refrigerator Repair.')
+@section('title', ($generalSettingView->site_name ?? 'Xpert Service BD') . ' | AC Service & Repair in Mirpur | Home Appliance Repair')
+@section('meta_description', ($generalSettingView->site_name ?? '') . ' – পেশাদার AC সার্ভিস, রিপেয়ার ও হোম অ্যাপ্লায়েন্স মেরামত সেবা মিরপুরে।')
 @section('meta_keywords', 'AC Service Mirpur, AC Repair Mirpur, AC Servicing, Washing Machine Repair, Refrigerator Repair')
 
 @section('content')
+
+@php $waNum = preg_replace('/[^0-9]/', '', $generalSettingView->pinterest_url ?? ''); $ph = $generalSettingView->mobile ?? ''; @endphp
 
 <section id="home" class="hero-section">
   <div class="hero-overlay"></div>
@@ -14,8 +16,8 @@
         <h1 class="hero-title">বিশ্বস্ত হোম অ্যাপ্লায়েন্স<br>রিপেয়ার ও সার্ভিস সেবা মিরপুরে</h1>
         <p class="hero-subtitle">AC Repair, Servicing, Installation, Gas Refill – Washing Machine, Refrigerator, Microwave, Dishwasher, Geyser সহ সব ধরনের ইলেকট্রিক ও ইলেকট্রনিক হোম অ্যাপ্লায়েন্স মেরামত সেবা।</p>
         <div class="hero-cta d-flex flex-wrap gap-3 mt-4">
-          <a href="tel:+8801723456789" class="btn btn-hero-call"><i class="fas fa-phone-alt me-2"></i> কল করুন এখনই</a>
-          <a href="https://wa.me/8801723456789?text=Hi!%20I%20need%20a%20service." target="_blank" rel="noopener" class="btn btn-hero-whatsapp"><i class="fab fa-whatsapp me-2"></i><span class="d-none d-sm-inline">WhatsApp এ মেসেজ দিন</span><span class="d-sm-none">WhatsApp</span></a>
+                    <a href="tel:{{ $ph }}" class="btn btn-hero-call"><i class="fas fa-phone-alt me-2"></i> কল করুন এখনই</a>
+          @if($waNum)<a href="https://wa.me/{{ $waNum }}?text=Hi!%20I%20need%20a%20service." target="_blank" rel="noopener" class="btn btn-hero-whatsapp"><i class="fab fa-whatsapp me-2"></i><span class="d-none d-sm-inline">WhatsApp এ মেসেজ দিন</span><span class="d-sm-none">WhatsApp</span></a>@endif
         </div>
         <div class="hero-badges mt-4 d-flex flex-wrap gap-3">
           <span><i class="fas fa-check-circle text-success me-1"></i> ১০+ বছর অভিজ্ঞতা</span>
@@ -24,7 +26,7 @@
         </div>
       </div>
       <div class="col-lg-5 d-none d-lg-block" data-aos="fade-left">
-        <img src="{{ asset('front/images/hero-img.png') }}" alt="AC Service and Repair in Mirpur - Xpert Service BD" class="img-fluid hero-img">
+        <img src="{{ asset('front/images/hero-img.png') }}" alt="{{ $generalSettingView->site_name ?? '' }}" class="img-fluid hero-img">
       </div>
     </div>
   </div>
@@ -41,7 +43,7 @@
               <p class="emergency-text mb-0">আমরা ২৪/৭ ইমার্জেন্সি কল সার্ভিস প্রদান করি। এখনই কল করুন, আমরা ৩০ মিনিটের মধ্যে পৌঁছে যাব।</p>
             </div>
             <div class="col-md-4 text-center text-md-end">
-              <a href="tel:+8801723456789" class="btn btn-emergency"><i class="fas fa-phone-alt me-2"></i> +880 1723-456789</a>
+              <a href="tel:{{ $ph }}" class="btn btn-emergency"><i class="fas fa-phone-alt me-2"></i> {{ $ph }}</a>
             </div>
           </div>
         </div>
@@ -278,29 +280,31 @@
       <div class="col-lg-5" data-aos="fade-right">
         <div class="contact-info-box">
           <h3>আমাদের সাথে যোগাযোগ করুন</h3>
-          <div class="contact-detail">
+          @if($ph)<div class="contact-detail">
             <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
-            <div><strong>ফোন</strong><p><a href="tel:+8801723456789">+880 1723-456789</a></p></div>
-          </div>
-          <div class="contact-detail">
+            <div><strong>ফোন</strong><p><a href="tel:{{ $ph }}">{{ $ph }}</a></p></div>
+          </div>@endif
+          @if($waNum)<div class="contact-detail">
             <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-            <div><strong>WhatsApp</strong><p><a href="https://wa.me/8801723456789" target="_blank" rel="noopener">+880 1723-456789</a></p></div>
-          </div>
-          <div class="contact-detail">
+            <div><strong>WhatsApp</strong><p><a href="https://wa.me/{{ $waNum }}" target="_blank" rel="noopener">{{ $waNum }}</a></p></div>
+          </div>@endif
+          @if($generalSettingView->email)<div class="contact-detail">
             <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-            <div><strong>ইমেইল</strong><p><a href="mailto:info@xpertservicebd.com">info@xpertservicebd.com</a></p></div>
-          </div>
-          <div class="contact-detail">
+            <div><strong>ইমেইল</strong><p><a href="mailto:{{ $generalSettingView->email }}">{{ $generalSettingView->email }}</a></p></div>
+          </div>@endif
+          @if($generalSettingView->address)<div class="contact-detail">
             <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div><strong>ঠিকানা</strong><p>মিরপুর-১, ঢাকা</p></div>
-          </div>
+            <div><strong>ঠিকানা</strong><p>{{ $generalSettingView->address }}</p></div>
+          </div>@endif
           <div class="contact-detail">
             <div class="contact-icon"><i class="fas fa-clock"></i></div>
             <div><strong>সার্ভিস সময়</strong><p>সকাল ৮:০০ থেকে রাত ১০:০০ (সপ্তাহে ৭ দিন)</p></div>
           </div>
           <div class="contact-social mt-4 d-flex gap-3">
-            <a href="https://facebook.com/xpertservicebd" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://wa.me/8801723456789" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            @if($generalSettingView->facebook_url)<a href="{{ $generalSettingView->facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>@endif
+            @if($generalSettingView->instagram_url)<a href="{{ $generalSettingView->instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>@endif
+            @if($generalSettingView->youtube_url)<a href="{{ $generalSettingView->youtube_url }}" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>@endif
+            @if($waNum)<a href="https://wa.me/{{ $waNum }}" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>@endif
           </div>
         </div>
       </div>
@@ -380,15 +384,15 @@
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Xpert Service BD",
-  "image": "{{ asset('front/images/logo.png') }}",
+  "name": "{{ $generalSettingView->site_name ?? '' }}",
+  "image": "{{ asset($generalSettingView->header_logo ?? 'front/images/logo.png') }}",
   "url": "{{ url('/') }}",
-  "telephone": "+8801723456789",
-  "description": "পেশাদার AC সার্ভিস, রিপেয়ার ও হোম অ্যাপ্লায়েন্স মেরামত সেবা মিরপুরে।",
+  "telephone": "{{ $ph }}",
+  "description": "{{ $generalSettingView->about_us_short ?? '' }}",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Mirpur-1, Road-5",
-    "addressLocality": "Mirpur, Dhaka",
+    "streetAddress": "{{ $generalSettingView->address ?? '' }}",
+    "addressLocality": "Dhaka",
     "addressCountry": "BD"
   },
   "areaServed": [@foreach($areas as $area)"{{ $area->name }}"@if(!$loop->last),@endif @endforeach],

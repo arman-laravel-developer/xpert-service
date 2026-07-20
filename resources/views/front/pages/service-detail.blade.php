@@ -1,13 +1,16 @@
 @extends('front.master')
 
-@section('title', $service->meta_title ?? $service->title . ' | Xpert Service BD')
+@section('title', ($service->meta_title ?? $service->title) . ' | ' . ($generalSettingView->site_name ?? ''))
 @section('meta_description', $service->meta_description ?? Str::limit($service->description, 160))
 
 @push('head')
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"{{ $service->title }}","provider":{"@type":"LocalBusiness","name":"Xpert Service BD","telephone":"+8801723456789"},"areaServed":"Mirpur, Dhaka","description":"{{ strip_tags($service->description) }}"}</script>
+@php $phSd = $generalSettingView->mobile ?? ''; $siteSd = $generalSettingView->site_name ?? ''; @endphp
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"{{ $service->title }}","provider":{"@type":"LocalBusiness","name":"{{ $siteSd }}","telephone":"{{ $phSd }}"},"areaServed":"Mirpur, Dhaka","description":"{{ strip_tags($service->description) }}"}</script>
 @endpush
 
 @section('content')
+
+@php $phSd = $generalSettingView->mobile ?? ''; $waSd = preg_replace('/[^0-9]/', '', $generalSettingView->pinterest_url ?? ''); $siteSd = $generalSettingView->site_name ?? ''; @endphp
 
 <section class="page-header" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:120px 0 50px;text-align:center;">
   <div class="container">
@@ -85,8 +88,8 @@
     <h2 style="color:#fff;font-weight:700;">এখনই কল করুন!</h2>
     <p style="color:rgba(255,255,255,0.8);">আপনার সমস্যার জন্য আমাদের সাথে যোগাযোগ করুন। আমরা দ্রুত সমাধান নিশ্চিত করব।</p>
     <div class="d-flex justify-content-center gap-3 flex-wrap">
-      <a href="tel:+8801723456789" class="btn btn-light btn-lg px-4"><i class="fas fa-phone-alt me-2"></i> কল করুন</a>
-      <a href="https://wa.me/8801723456789?text=Hi!%20I%20need%20service." target="_blank" rel="noopener" class="btn btn-success btn-lg px-4"><i class="fab fa-whatsapp me-2"></i> WhatsApp</a>
+      <a href="tel:{{ $phSd }}" class="btn btn-light btn-lg px-4"><i class="fas fa-phone-alt me-2"></i> কল করুন</a>
+      @if($waSd)<a href="https://wa.me/{{ $waSd }}?text=Hi!%20I%20need%20service." target="_blank" rel="noopener" class="btn btn-success btn-lg px-4"><i class="fab fa-whatsapp me-2"></i> WhatsApp</a>@endif
     </div>
   </div>
 </section>

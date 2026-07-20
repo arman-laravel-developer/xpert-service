@@ -4,233 +4,136 @@
 @endsection
 
 @section('body')
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <a href="{{route('dashboard')}}" class="btn btn-primary ms-2"><i class="mdi mdi-autorenew"></i></a>
+            </div>
+            <h4 class="page-title">General Settings</h4>
+        </div>
+    </div>
+</div>
+
+<form action="{{route('setting.update')}}" method="POST" enctype="multipart/form-data">
+    @csrf
+
     <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <form class="d-flex">
-                        <div class="input-group">
-                            <input type="text" class="form-control form-control-light" id="dash-daterange">
-                            <span class="input-group-text bg-primary border-primary text-white">
-                                                    <i class="mdi mdi-calendar-range font-13"></i>
-                                                </span>
-                        </div>
-                        <a href="javascript: void(0);" class="btn btn-primary ms-2">
-                            <i class="mdi mdi-autorenew"></i>
-                        </a>
-                        <a href="javascript: void(0);" class="btn btn-primary ms-1">
-                            <i class="mdi mdi-filter-variant"></i>
-                        </a>
-                    </form>
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header"><h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Basic Info</h5></div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Site Name</label>
+                        <input type="text" class="form-control" name="site_name" value="{{optional($generalSetting)->site_name}}" placeholder="Site name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mobile</label>
+                        <input type="text" class="form-control" name="mobile" value="{{optional($generalSetting)->mobile}}" placeholder="Site mobile">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" value="{{optional($generalSetting)->email}}" placeholder="Site email">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" name="address" rows="2" placeholder="Site address">{{optional($generalSetting)->address}}</textarea>
+                    </div>
+                    <div class="mb-0">
+                        <label class="form-label">About Us (Footer)</label>
+                        <textarea class="form-control" name="about_us_short" rows="3" placeholder="Short description for footer">{{optional($generalSetting)->about_us_short}}</textarea>
+                    </div>
                 </div>
-                <h4 class="page-title">General Settings</h4>
+            </div>
+            <div class="card">
+                <div class="card-header"><h5 class="card-title mb-0"><i class="fas fa-share-alt me-2"></i>Social Links</h5></div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <label class="form-label"><i class="fab fa-facebook text-primary me-1"></i>Facebook</label>
+                        <input type="text" class="form-control" name="facebook_url" value="{{optional($generalSetting)->facebook_url}}" placeholder="https://facebook.com/...">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label"><i class="fab fa-instagram text-danger me-1"></i>Instagram</label>
+                        <input type="text" class="form-control" name="instagram_url" value="{{optional($generalSetting)->instagram_url}}" placeholder="https://instagram.com/...">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label"><i class="fab fa-youtube text-danger me-1"></i>YouTube</label>
+                        <input type="text" class="form-control" name="youtube_url" value="{{optional($generalSetting)->youtube_url}}" placeholder="https://youtube.com/...">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label"><i class="fab fa-twitter text-info me-1"></i>Twitter</label>
+                        <input type="text" class="form-control" name="twitter_url" value="{{optional($generalSetting)->twitter_url}}" placeholder="https://twitter.com/...">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label"><i class="fab fa-linkedin text-primary me-1"></i>LinkedIn</label>
+                        <input type="text" class="form-control" name="linkedin_url" value="{{optional($generalSetting)->linkedin_url}}" placeholder="https://linkedin.com/...">
+                    </div>
+                    <div class="mb-0">
+                        <label class="form-label"><i class="fab fa-whatsapp text-success me-1"></i>WhatsApp Number</label>
+                        <input type="text" class="form-control" name="pinterest_url" value="{{optional($generalSetting)->pinterest_url}}" placeholder="+8801xxxxxxxxx">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header"><h5 class="card-title mb-0"><i class="fas fa-image me-2"></i>Logos & Favicon</h5></div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Header Logo</label>
+                            <div class="upload-preview mb-2">
+                                <img id="headerLogoPreview" src="{{asset(optional($generalSetting)->header_logo)}}" style="max-width:100%;height:60px;object-fit:contain;">
+                            </div>
+                            <input type="file" class="form-control form-control-sm" name="header_logo" accept="image/*" onchange="previewFile(this, 'headerLogoPreview')">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Footer Logo</label>
+                            <div class="upload-preview mb-2">
+                                <img id="footerLogoPreview" src="{{asset(optional($generalSetting)->footer_logo)}}" style="max-width:100%;height:60px;object-fit:contain;">
+                            </div>
+                            <input type="file" class="form-control form-control-sm" name="footer_logo" accept="image/*" onchange="previewFile(this, 'footerLogoPreview')">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Favicon</label>
+                            <div class="upload-preview mb-2">
+                                <img id="faviconPreview" src="{{asset(optional($generalSetting)->favicon)}}" style="max-width:100%;height:60px;object-fit:contain;">
+                            </div>
+                            <input type="file" class="form-control form-control-sm" name="favicon" accept=".ico,.png,.jpg,.jpeg,.gif" onchange="previewFile(this, 'faviconPreview')">
+                        </div>
+                        <div class="col-md-6 mb-0">
+                            <label class="form-label">Payment Method Image</label>
+                            <div class="upload-preview mb-2">
+                                <img id="paymentPreview" src="{{asset(optional($generalSetting)->payment_method_image)}}" style="max-width:100%;height:60px;object-fit:contain;">
+                            </div>
+                            <input type="file" class="form-control form-control-sm" name="payment_method_image" accept="image/*" onchange="previewFile(this, 'paymentPreview')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i>Save Settings</button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{route('setting.update')}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row mb-1">
-                            <label class="col-form-label">Site Name</label>
-                            <input type="text" class="form-control @error('site_name') is-invalid @enderror" value="{{optional($generalSetting)->site_name}}" name="site_name" placeholder="Site name"/>
-                            @error('site_name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">Site Mobile</label>
-                            <input type="text" class="form-control @error('mobile') is-invalid @enderror" value="{{optional($generalSetting)->mobile}}" name="mobile" placeholder="Site mobile"/>
-                            @error('mobile')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">WhatsApp url</label>
-                            <input type="tel" class="form-control @error('pinterest_url') is-invalid @enderror" value="{{optional($generalSetting)->pinterest_url}}" name="pinterest_url" placeholder="+8801xxxxxxxxx"/>
-                            @error('pinterest_url')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">Site email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{optional($generalSetting)->email}}" name="email" placeholder="Site email"/>
-                            @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">Site address</label>
-                            <textarea type="text" class="form-control @error('address') is-invalid @enderror" name="address" placeholder="Site address">{{optional($generalSetting)->address}}</textarea>
-                            @error('address')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">About Us Footer</label>
-                            <textarea type="text" class="form-control @error('about_us_short') is-invalid @enderror" name="about_us_short" placeholder="About us">{{optional($generalSetting)->about_us_short}}</textarea>
-                            @error('about_us_short')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">Facebook url</label>
-                            <input type="text" class="form-control @error('facebook_url') is-invalid @enderror" value="{{optional($generalSetting)->facebook_url}}" name="facebook_url" placeholder="facebook url"/>
-                            @error('facebook_url')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">Instagram url</label>
-                            <input type="text" class="form-control @error('instagram_url') is-invalid @enderror" value="{{optional($generalSetting)->instagram_url}}" name="instagram_url" placeholder="instagram url"/>
-                            @error('instagram_url')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">Youtube url</label>
-                            <input type="text" class="form-control @error('youtube_url') is-invalid @enderror" value="{{optional($generalSetting)->youtube_url}}" name="youtube_url" placeholder="youtube url"/>
-                            @error('youtube_url')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">Twitter url</label>
-                            <input type="text" class="form-control @error('twitter_url') is-invalid @enderror" value="{{optional($generalSetting)->twitter_url}}" name="twitter_url" placeholder="twitter url"/>
-                            @error('twitter_url')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">LinkedIn url</label>
-                            <input type="text" class="form-control @error('linkedin_url') is-invalid @enderror" value="{{optional($generalSetting)->linkedin_url}}" name="linkedin_url" placeholder="linkedIn url"/>
-                            @error('linkedin_url')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">Header Logo</label>
-                            <input type="file" class="form-control @error('header_logo') is-invalid @enderror" name="header_logo" id="headerLogo"/>
-                            <img id="headerLogoPreview" class="mt-1" src="{{asset(optional($generalSetting)->header_logo)}}" alt="Preview" style="max-width: 200px; max-height: 200px;">
-                            @error('header_logo')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">Footer Logo</label>
-                            <input type="file" class="form-control @error('footer_logo') is-invalid @enderror" name="footer_logo" id="footerLogo"/>
-                            <img id="footerLogoPreview" class="mt-1" src="{{asset(optional($generalSetting)->footer_logo)}}" alt="Preview" style="max-width: 200px; max-height: 200px;">
-                            @error('footer_logo')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-1">
-                            <label class="col-form-label">Favicon</label>
-                            <input type="file" class="form-control @error('favicon') is-invalid @enderror" name="favicon" accept="ico" id="favicon"/>
-                            <img id="faviconPreview" class="mt-1" src="{{asset(optional($generalSetting)->favicon)}}" alt="Preview" style="max-width: 200px; max-height: 200px;">
-                            @error('favicon')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-form-label">Payment method footer image</label>
-                            <input type="file" class="form-control @error('payment_method_image') is-invalid @enderror" name="payment_method_image" id="payment_method_image"/>
-                            <img id="paymentPreview" class="mt-1" src="{{asset(optional($generalSetting)->payment_method_image)}}" alt="Preview" style="max-width: 200px; max-height: 200px;">
-                            @error('payment_method_image')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="row">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div>
-        <!-- end col -->
-    </div>
-    <script>
-        function previewHeaderImage(event) {
-            var input = event.target;
-            var reader = new FileReader();
-
-            reader.onload = function(){
-                var headerLogoPreview = document.getElementById('headerLogoPreview');
-                headerLogoPreview.src = reader.result;
-                headerLogoPreview.style.display = 'block';
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-
-        var headerLogo = document.getElementById('headerLogo');
-        headerLogo.addEventListener('change', previewHeaderImage);
-    </script>
-    <script>
-        function previewFooterImage(event) {
-            var input = event.target;
-            var reader = new FileReader();
-
-            reader.onload = function(){
-                var footerLogoPreview = document.getElementById('footerLogoPreview');
-                footerLogoPreview.src = reader.result;
-                footerLogoPreview.style.display = 'block';
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-
-        var footerLogo = document.getElementById('footerLogo');
-        footerLogo.addEventListener('change', previewFooterImage);
-    </script>
-    <script>
-        function previewFaviconImage(event) {
-            var input = event.target;
-            var reader = new FileReader();
-
-            reader.onload = function(){
-                var faviconPreview = document.getElementById('faviconPreview');
-                faviconPreview.src = reader.result;
-                faviconPreview.style.display = 'block';
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-
-        var favicon = document.getElementById('favicon');
-        favicon.addEventListener('change', previewFaviconImage);
-    </script>
-    <script>
-        function previewPaymentImage(event) {
-            var input = event.target;
-            var reader = new FileReader();
-
-            reader.onload = function(){
-                var paymentPreview = document.getElementById('paymentPreview');
-                paymentPreview.src = reader.result;
-                paymentPreview.style.display = 'block';
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-
-        var payment_method_image = document.getElementById('payment_method_image');
-        payment_method_image.addEventListener('change', previewPaymentImage);
-    </script>
-
-    <script>
-        $('#summernote').summernote({
-            tabsize: 2,
-            height: 300
-        });
-    </script>
-    <!-- end row -->
-
-
-
+</form>
 @endsection
+
+@push('head')
+<script>
+function previewFile(input, imgId) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById(imgId).src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+@endpush
 
 
 

@@ -1,10 +1,11 @@
 @extends('front.master')
 
-@section('title', 'যোগাযোগ | Xpert Service BD - AC Service & Repair Mirpur')
-@section('meta_description', 'Xpert Service BD-এর সাথে যোগাযোগ করুন। ফোন, WhatsApp, ইমেইলে সরাসরি যোগাযোগ করুন। মিরপুর, ঢাকা।')
-@section('meta_keywords', 'Xpert Service BD Contact, AC Service Mirpur Contact, Home Appliance Repair Contact')
+@section('title', 'যোগাযোগ | ' . ($generalSettingView->site_name ?? ''))
+@section('meta_description', ($generalSettingView->site_name ?? '') . '-এর সাথে যোগাযোগ করুন। ফোন, WhatsApp, ইমেইলে সরাসরি যোগাযোগ করুন।')
 
 @section('content')
+
+@php $waNumC = preg_replace('/[^0-9]/', '', $generalSettingView->pinterest_url ?? ''); $phC = $generalSettingView->mobile ?? ''; $siteC = $generalSettingView->site_name ?? ''; @endphp
 
 <section class="page-header" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:120px 0 50px;text-align:center;">
   <div class="container">
@@ -28,29 +29,31 @@
       <div class="col-lg-5" data-aos="fade-right">
         <div class="contact-info-box">
           <h3>যোগাযোগের তথ্য</h3>
-          <div class="contact-detail">
+          @if($phC)<div class="contact-detail">
             <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
-            <div><strong>ফোন</strong><p><a href="tel:+8801723456789">+880 1723-456789</a></p></div>
-          </div>
-          <div class="contact-detail">
+            <div><strong>ফোন</strong><p><a href="tel:{{ $phC }}">{{ $phC }}</a></p></div>
+          </div>@endif
+          @if($waNumC)<div class="contact-detail">
             <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-            <div><strong>WhatsApp</strong><p><a href="https://wa.me/8801723456789" target="_blank" rel="noopener">+880 1723-456789</a></p></div>
-          </div>
-          <div class="contact-detail">
+            <div><strong>WhatsApp</strong><p><a href="https://wa.me/{{ $waNumC }}" target="_blank" rel="noopener">{{ $waNumC }}</a></p></div>
+          </div>@endif
+          @if($generalSettingView->email)<div class="contact-detail">
             <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-            <div><strong>ইমেইল</strong><p><a href="mailto:info@xpertservicebd.com">info@xpertservicebd.com</a></p></div>
-          </div>
-          <div class="contact-detail">
+            <div><strong>ইমেইল</strong><p><a href="mailto:{{ $generalSettingView->email }}">{{ $generalSettingView->email }}</a></p></div>
+          </div>@endif
+          @if($generalSettingView->address)<div class="contact-detail">
             <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div><strong>ঠিকানা</strong><p>মিরপুর-১, রোড-৫, ঢাকা</p></div>
-          </div>
+            <div><strong>ঠিকানা</strong><p>{{ $generalSettingView->address }}</p></div>
+          </div>@endif
           <div class="contact-detail">
             <div class="contact-icon"><i class="fas fa-clock"></i></div>
             <div><strong>সার্ভিস সময়</strong><p>সকাল ৮:০০ থেকে রাত ১০:০০ (সপ্তাহে ৭ দিন)</p></div>
           </div>
           <div class="contact-social mt-4 d-flex gap-3">
-            <a href="https://facebook.com/xpertservicebd" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://wa.me/8801723456789" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            @if($generalSettingView->facebook_url)<a href="{{ $generalSettingView->facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>@endif
+            @if($generalSettingView->instagram_url)<a href="{{ $generalSettingView->instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>@endif
+            @if($generalSettingView->youtube_url)<a href="{{ $generalSettingView->youtube_url }}" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>@endif
+            @if($waNumC)<a href="https://wa.me/{{ $waNumC }}" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>@endif
           </div>
         </div>
       </div>
@@ -92,7 +95,7 @@
 <section class="map-section" data-aos="fade-up">
   <div class="container-fluid p-0">
     <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.831!2d90.365!3d23.806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQ4JzIxLjYiTiA5MMKwMjEnNDUuMCJF!5e0!3m2!1sen!2sbd!4v1" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade" title="Xpert Service BD Location - Mirpur, Dhaka"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.831!2d90.365!3d23.806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQ4JzIxLjYiTiA5MMKwMjEnNDUuMCJF!5e0!3m2!1sen!2sbd!4v1" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade" title="{{ $siteC }} Location"></iframe>
     </div>
   </div>
 </section>

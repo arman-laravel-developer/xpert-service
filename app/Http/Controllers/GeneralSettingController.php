@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\GeneralSetting;
-use App\Models\HomeCategory;
 use Illuminate\Http\Request;
 use ZipArchive;
 
@@ -13,8 +11,7 @@ class GeneralSettingController extends Controller
     public function index()
     {
         $generalSetting = GeneralSetting::latest()->first();
-        $categories = Category::where(['parent_id' => 0])->where('status', 1)->get();
-        return view('admin.setting.index', compact('generalSetting', 'categories'));
+        return view('admin.setting.index', compact('generalSetting'));
     }
 
     public function getHeaderLogoUrl($request)
@@ -46,12 +43,14 @@ class GeneralSettingController extends Controller
     }
     public function getFaviconUrl($request)
     {
-        $favicon = $request->file('favicon');
-        $faviconName = 'favicon.ico';
-        $directory = 'favicon/';
-        $favicon->move($directory, $faviconName);
-        $faviconUrl = $directory.$faviconName;
-        return $faviconUrl;
+        $file = $request->file('favicon');
+        $dir = 'favicon';
+        $absDir = public_path($dir);
+        if (!file_exists($absDir)) mkdir($absDir, 0755, true);
+        $ext = strtolower($file->getClientOriginalExtension());
+        $name = 'favicon.' . $ext;
+        $file->move($absDir, $name);
+        return $dir . '/' . $name;
     }
 
     public function update(Request $request)
@@ -60,9 +59,9 @@ class GeneralSettingController extends Controller
         if ($generalSetting)
         {
             $request->validate([
-                'favicon' => 'mimes:ico',
+                'favicon' => 'mimes:ico,png,jpg,jpeg,gif',
             ], [
-                'favicon.mimes' => 'The favicon must be a file of type: .ico.',
+                'favicon.mimes' => 'The favicon must be an image file (ico, png, jpg, jpeg, gif).',
             ]);
 
             $generalSetting->site_name = $request->site_name;
@@ -134,9 +133,9 @@ class GeneralSettingController extends Controller
         else
         {
             $request->validate([
-                'favicon' => 'mimes:ico',
+                'favicon' => 'mimes:ico,png,jpg,jpeg,gif',
             ], [
-                'favicon.mimes' => 'The favicon must be a file of type: .ico.',
+                'favicon.mimes' => 'The favicon must be an image file (ico, png, jpg, jpeg, gif).',
             ]);
             $generalSetting = new GeneralSetting();
             $generalSetting->site_name = $request->site_name;

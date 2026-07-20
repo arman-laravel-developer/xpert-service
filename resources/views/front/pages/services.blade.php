@@ -1,10 +1,12 @@
 @extends('front.master')
 
-@section('title', 'সেবাসমূহ | Xpert Service BD - AC Service & Repair in Mirpur')
-@section('meta_description', 'Xpert Service BD-এর সব ধরনের সেবা – AC Repair, AC Servicing, AC Installation, AC Gas Refill, Washing Machine Repair, Refrigerator Repair, Microwave, Dishwasher, Geyser রিপেয়ার ও ইনস্টলেশন।')
-@section('meta_keywords', 'AC Service Mirpur, AC Repair, Washing Machine Repair, Refrigerator Repair, Microwave Repair')
+@section('title', 'সেবাসমূহ | ' . ($generalSettingView->site_name ?? '') . ' - AC Service & Repair')
+@section('meta_description', ($generalSettingView->site_name ?? '') . '-এর সব ধরনের সেবা – AC Repair, Servicing, Installation, Gas Refill, Washing Machine, Refrigerator, Microwave, Dishwasher, Geyser রিপেয়ার ও ইনস্টলেশন।')
+@section('meta_keywords', 'AC Service Mirpur, AC Repair, Washing Machine Repair, Refrigerator Repair')
 
 @section('content')
+
+@php $phSv = $generalSettingView->mobile ?? ''; @endphp
 
 <section class="page-header" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:120px 0 50px;text-align:center;">
   <div class="container">
@@ -53,7 +55,7 @@
               <p class="emergency-text mb-0">আমরা ২৪/৭ ইমার্জেন্সি কল সার্ভিস প্রদান করি। এখনই কল করুন, আমরা ৩০ মিনিটের মধ্যে পৌঁছে যাব।</p>
             </div>
             <div class="col-md-4 text-center text-md-end">
-              <a href="tel:+8801723456789" class="btn btn-emergency"><i class="fas fa-phone-alt me-2"></i> +880 1723-456789</a>
+              <a href="tel:{{ $phSv }}" class="btn btn-emergency"><i class="fas fa-phone-alt me-2"></i> {{ $phSv }}</a>
             </div>
           </div>
         </div>

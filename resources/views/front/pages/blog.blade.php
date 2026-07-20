@@ -1,10 +1,12 @@
 @extends('front.master')
 
-@section('title', 'ব্লগ | Xpert Service BD - হোম অ্যাপ্লায়েন্স টিপস')
-@section('meta_description', 'Xpert Service BD ব্লগ – AC সার্ভিসিং, ওয়াশিং মেশিন, ফ্রিজ ও হোম অ্যাপ্লায়েন্স রক্ষণাবেক্ষণের টিপস, ট্রিকস ও পরামর্শ।')
+@section('title', 'ব্লগ | ' . ($generalSettingView->site_name ?? '') . ' - হোম অ্যাপ্লায়েন্স টিপস')
+@section('meta_description', ($generalSettingView->site_name ?? '') . ' ব্লগ – AC সার্ভিসিং, ওয়াশিং মেশিন, ফ্রিজ ও হোম অ্যাপ্লায়েন্স রক্ষণাবেক্ষণের টিপস।')
 @section('meta_keywords', 'AC Service Tips, Washing Machine Tips, Fridge Care Tips, Home Appliance Blog')
 
 @section('content')
+
+@php $phBl = $generalSettingView->mobile ?? ''; @endphp
 
 <section class="page-header" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:120px 0 50px;text-align:center;">
   <div class="container">
@@ -60,7 +62,7 @@
               <p class="emergency-text mb-0">এখনই কল করুন বা WhatsApp এ মেসেজ দিন – আমরা দ্রুত সমাধান দেব।</p>
             </div>
             <div class="col-md-4 text-center text-md-end">
-              <a href="tel:+8801723456789" class="btn btn-emergency"><i class="fas fa-phone-alt me-2"></i> +880 1723-456789</a>
+              <a href="tel:{{ $phBl }}" class="btn btn-emergency"><i class="fas fa-phone-alt me-2"></i> {{ $phBl }}</a>
             </div>
           </div>
         </div>

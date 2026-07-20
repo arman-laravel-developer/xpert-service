@@ -1,9 +1,11 @@
 @extends('front.master')
 
-@section('title', $post->meta_title ?? $post->title . ' | Xpert Service BD')
+@section('title', ($post->meta_title ?? $post->title) . ' | ' . ($generalSettingView->site_name ?? ''))
 @section('meta_description', $post->meta_description ?? Str::limit(strip_tags($post->content), 160))
 
 @section('content')
+
+@php $phBd = $generalSettingView->mobile ?? ''; $waBd = preg_replace('/[^0-9]/', '', $generalSettingView->pinterest_url ?? ''); @endphp
 
 <section class="page-header" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:120px 0 50px;text-align:center;">
   <div class="container">
@@ -44,7 +46,7 @@
           <div class="d-flex gap-3 mt-4 pt-4 border-top">
             <span class="fw-bold">শেয়ার করুন:</span>
             <a href="https://facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener" class="text-primary"><i class="fab fa-facebook fa-lg"></i></a>
-            <a href="https://wa.me/8801723456789?text={{ urlencode($post->title . ' - ' . url()->current()) }}" target="_blank" rel="noopener" class="text-success"><i class="fab fa-whatsapp fa-lg"></i></a>
+            @if($waBd)<a href="https://wa.me/{{ $waBd }}?text={{ urlencode($post->title . ' - ' . url()->current()) }}" target="_blank" rel="noopener" class="text-success"><i class="fab fa-whatsapp fa-lg"></i></a>@endif
           </div>
         </article>
 
@@ -74,8 +76,8 @@
         <div class="card mb-4 p-4" style="border:1px solid var(--border);border-radius:var(--radius);">
           <h5 style="font-weight:700;color:var(--primary);">দ্রুত সার্ভিস</h5>
           <p class="text-muted small">এখনই কল করুন এবং দ্রুত সার্ভিস পান</p>
-          <a href="tel:+8801723456789" class="btn btn-call-nav mb-2"><i class="fas fa-phone-alt me-2"></i> কল করুন</a>
-          <a href="https://wa.me/8801723456789" target="_blank" rel="noopener" class="btn btn-whatsapp-nav"><i class="fab fa-whatsapp me-2"></i> WhatsApp</a>
+          <a href="tel:{{ $phBd }}" class="btn btn-call-nav mb-2"><i class="fas fa-phone-alt me-2"></i> কল করুন</a>
+          @if($waBd)<a href="https://wa.me/{{ $waBd }}" target="_blank" rel="noopener" class="btn btn-whatsapp-nav"><i class="fab fa-whatsapp me-2"></i> WhatsApp</a>@endif
         </div>
 
         @if($recentPosts->count() > 0)
@@ -108,8 +110,8 @@
     <h3 style="color:#fff;font-weight:700;">আপনার সার্ভিসের প্রয়োজন আছে?</h3>
     <p style="color:rgba(255,255,255,0.8);">এখনই কল বা WhatsApp করুন – আমরা দ্রুত সেবা দিতে প্রস্তুত</p>
     <div class="d-flex justify-content-center gap-3 flex-wrap">
-      <a href="tel:+8801723456789" class="btn btn-light btn-lg px-4"><i class="fas fa-phone-alt me-2"></i> কল করুন</a>
-      <a href="https://wa.me/8801723456789?text=Hi!%20I%20need%20service." target="_blank" rel="noopener" class="btn btn-success btn-lg px-4"><i class="fab fa-whatsapp me-2"></i> WhatsApp</a>
+      <a href="tel:{{ $phBd }}" class="btn btn-light btn-lg px-4"><i class="fas fa-phone-alt me-2"></i> কল করুন</a>
+      @if($waBd)<a href="https://wa.me/{{ $waBd }}?text=Hi!%20I%20need%20service." target="_blank" rel="noopener" class="btn btn-success btn-lg px-4"><i class="fab fa-whatsapp me-2"></i> WhatsApp</a>@endif
     </div>
   </div>
 </section>

@@ -1,10 +1,12 @@
 @extends('front.master')
 
-@section('title', 'ব্র্যান্ড | Xpert Service BD - Samsung, LG, Gree, General Repair')
-@section('meta_description', 'Xpert Service BD – Samsung, LG, Gree, General, Toshiba, Panasonic, Mitsubishi, Whirlpool, Midea, Haier, Walton, Singer সহ সব ব্র্যান্ডের হোম অ্যাপ্লায়েন্স রিপেয়ার ও সার্ভিস।')
-@section('meta_keywords', 'Samsung Repair Mirpur, LG Repair, Gree AC Service, General AC Repair')
+@section('title', 'ব্র্যান্ড | ' . ($generalSettingView->site_name ?? ''))
+@section('meta_description', ($generalSettingView->site_name ?? '') . ' – সব ব্র্যান্ডের হোম অ্যাপ্লায়েন্স রিপেয়ার ও সার্ভিস।')
+@section('meta_keywords', 'Samsung Repair, LG Repair, Gree AC Service, General AC Repair')
 
 @section('content')
+
+@php $phBr = $generalSettingView->mobile ?? ''; @endphp
 
 <section class="page-header" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:120px 0 50px;text-align:center;">
   <div class="container">
@@ -51,7 +53,7 @@
               <p class="emergency-text mb-0">যেকোন ব্র্যান্ডের হোম অ্যাপ্লায়েন্স – এখনই কল করুন!</p>
             </div>
             <div class="col-md-4 text-center text-md-end">
-              <a href="tel:+8801723456789" class="btn btn-emergency"><i class="fas fa-phone-alt me-2"></i> +880 1723-456789</a>
+              <a href="tel:{{ $phBr }}" class="btn btn-emergency"><i class="fas fa-phone-alt me-2"></i> {{ $phBr }}</a>
             </div>
           </div>
         </div>

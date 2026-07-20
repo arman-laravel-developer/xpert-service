@@ -4,17 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactForm;
 use App\Models\Customer;
+use App\Models\Service;
+use App\Models\Brand;
+use App\Models\ServiceArea;
+use App\Models\BlogPost;
+use App\Models\GalleryItem;
+use App\Models\Review;
+use App\Models\Faq;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 use Mail;
 use Session;
-use function Ramsey\Collection\offer;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.home.index');
+        $data['totalServices'] = Service::count();
+        $data['totalBrands'] = Brand::count();
+        $data['totalServiceAreas'] = ServiceArea::count();
+        $data['totalBlogPosts'] = BlogPost::count();
+        $data['totalGalleryItems'] = GalleryItem::count();
+        $data['totalReviews'] = Review::count();
+        $data['totalFaqs'] = Faq::count();
+        $data['totalContactQueries'] = ContactForm::count();
+        $data['totalUsers'] = User::count();
+        $data['recentServices'] = Service::latest()->take(5)->get();
+        $data['recentBlogPosts'] = BlogPost::latest()->take(5)->get();
+        $data['recentContactQueries'] = ContactForm::latest()->take(5)->get();
+        return view('admin.home.index', $data);
     }
 
     public function testMail(Request $request)

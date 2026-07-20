@@ -1,10 +1,12 @@
 @extends('front.master')
 
-@section('title', 'সার্ভিস এলাকা | Xpert Service BD - মিরপুর ও আশেপাশে')
-@section('meta_description', 'Xpert Service BD সার্ভিস এলাকা – মিরপুর-১, ২, ৬, ৭, ১০, ১১, ১২, ১৩, ১৪, ১৫, ৬০, ৬২, পল্লবী, রূপনগর, কাজীপাড়া, শেওড়াপাড়া, মনিপুর, দুয়ারীপাড়া, বাউনিয়াবাদ, কাফরুল।')
+@section('title', 'সার্ভিস এলাকা | ' . ($generalSettingView->site_name ?? '') . ' - মিরপুর ও আশেপাশে')
+@section('meta_description', ($generalSettingView->site_name ?? '') . ' সার্ভিস এলাকা – মিরপুরের সর্বত্র আমরা পৌঁছে যাই।')
 @section('meta_keywords', 'AC Service Mirpur, Service Area Mirpur, Home Appliance Repair Mirpur')
 
 @section('content')
+
+@php $phAr = $generalSettingView->mobile ?? ''; @endphp
 
 <section class="page-header" style="background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:120px 0 50px;text-align:center;">
   <div class="container">
@@ -78,7 +80,7 @@
               <p class="emergency-text mb-0">এখনই কল করুন – মিরপুরের যেকোন প্রান্তে ৩০ মিনিটের মধ্যে পৌঁছে যাব।</p>
             </div>
             <div class="col-md-4 text-center text-md-end">
-              <a href="tel:+8801723456789" class="btn btn-emergency"><i class="fas fa-phone-alt me-2"></i> +880 1723-456789</a>
+              <a href="tel:{{ $phAr }}" class="btn btn-emergency"><i class="fas fa-phone-alt me-2"></i> {{ $phAr }}</a>
             </div>
           </div>
         </div>
