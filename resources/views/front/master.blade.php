@@ -81,7 +81,6 @@
       <div class="col-md-6 col-lg-4">
         <div class="footer-brand">
           <img src="{{ asset($footerLogo) }}" alt="{{ $siteName }}" height="40" class="me-2">
-          <span class="footer-brand-text">{{ $siteName }}</span>
         </div>
         <p class="footer-desc mt-3">{{ $generalSettingView->about_us_short ?? '' }}</p>
         <div class="footer-social d-flex gap-3">
