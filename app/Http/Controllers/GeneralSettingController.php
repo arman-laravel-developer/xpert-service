@@ -76,6 +76,7 @@ class GeneralSettingController extends Controller
             $generalSetting->twitter_url = $request->twitter_url;
             $generalSetting->pinterest_url = $request->pinterest_url;
             $generalSetting->linkedin_url = $request->linkedin_url;
+            $generalSetting->google_map = $request->google_map;
             if ($request->file('header_logo'))
             {
                 if (file_exists($generalSetting->header_logo))
@@ -150,6 +151,7 @@ class GeneralSettingController extends Controller
             $generalSetting->twitter_url = $request->twitter_url;
             $generalSetting->pinterest_url = $request->pinterest_url;
             $generalSetting->linkedin_url = $request->linkedin_url;
+            $generalSetting->google_map = $request->google_map;
             if ($request->file('header_logo'))
             {
                 $generalSetting->header_logo = $this->getHeaderLogoUrl($request);

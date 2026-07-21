@@ -74,6 +74,24 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header"><h5 class="card-title mb-0"><i class="fas fa-map-marked-alt me-2"></i>Google Map</h5></div>
+                <div class="card-body">
+                    <div class="mb-0">
+                        <label class="form-label">Embed URL</label>
+                        <textarea class="form-control" name="google_map" rows="3" placeholder="Paste Google Maps iframe embed URL here...">{{optional($generalSetting)->google_map}}</textarea>
+                        <small class="text-muted">Go to Google Maps > Share > Embed a map > Copy the iframe src URL</small>
+                        @if(optional($generalSetting)->google_map)
+                        <div class="mt-2">
+                            <label class="form-label text-muted">Preview</label>
+                            <div style="border:1px solid #ddd;border-radius:8px;overflow:hidden;">
+                                {!! optional($generalSetting)->google_map !!}
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-xl-6">
             <div class="card">

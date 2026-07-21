@@ -349,7 +349,15 @@
 <section class="map-section" data-aos="fade-up">
   <div class="container-fluid p-0">
     <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.831!2d90.365!3d23.806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQ4JzIxLjYiTiA5MMKwMjEnNDUuMCJF!5e0!3m2!1sen!2sbd!4v1" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade" title="Xpert Service BD Location - Mirpur, Dhaka"></iframe>
+      @if(optional($generalSettingView)->google_map)
+        @if(str_contains(optional($generalSettingView)->google_map, '<iframe'))
+          {!! optional($generalSettingView)->google_map !!}
+        @else
+          <iframe src="{{ optional($generalSettingView)->google_map }}" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade" title="Xpert Service BD Location - Mirpur, Dhaka"></iframe>
+        @endif
+      @else
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.831!2d90.365!3d23.806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQ4JzIxLjYiTiA5MMKwMjEnNDUuMCJF!5e0!3m2!1sen!2sbd!4v1" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade" title="Xpert Service BD Location - Mirpur, Dhaka"></iframe>
+      @endif
     </div>
   </div>
 </section>
