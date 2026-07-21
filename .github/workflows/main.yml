@@ -11,10 +11,10 @@ jobs:
       - name: Get the latest code
         uses: actions/checkout@v6
       - uses: actions/setup-node@master
-      - name: Install Dependencies
-        run: composer update --ignore-platform-reqs
-      - name: Generate storage link
-        run: php artisan storage:link
+      # - name: Install Dependencies
+      #   run: composer update --ignore-platform-reqs
+      # - name: Generate storage link
+      #   run: php artisan storage:link
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
       - name: 📂 Sync files to /laravel-arman
@@ -28,5 +28,5 @@ jobs:
           exclude: |
             **/admin-template/**
             **/front-template/**
-      - name: Optimize Website
-        run: php artisan optimize:clear
+      # - name: Optimize Website
+      #   run: php artisan optimize:clear
