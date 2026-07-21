@@ -62,6 +62,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/backup', [GeneralSettingController::class, 'backup'])->name('setting.backup');
         Route::get('/smtp', [GeneralSettingController::class, 'smtp'])->name('setting.smtp');
         Route::post('/smtp-update', [GeneralSettingController::class, 'smtpUpdate'])->name('setting.smtp-update');
+        Route::get('/lock-screen', function () { return view('admin.lock-screen'); })->name('lock-screen');
+        Route::post('/lock-screen-unlock', [App\Http\Controllers\GeneralSettingController::class, 'unlock'])->name('lock-screen.unlock');
+        Route::get('/profile', [App\Http\Controllers\UserController::class, 'adminProfile'])->name('profile.admin');
+        Route::post('/profile/update', [App\Http\Controllers\UserController::class, 'updateAdminProfile'])->name('profile.update');
     });
 
     Route::middleware(['roles'])->group(function () {
@@ -108,6 +112,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             Route::get('/edit/{id}', [GeneralSettingController::class, 'edit'])->name('setting.edit');
             Route::post('/update', [GeneralSettingController::class, 'update'])->name('setting.update');
             Route::post('/delete/{id}', [GeneralSettingController::class, 'delete'])->name('setting.delete');
+        });
+
+        Route::prefix('about-us')->group(function () {
+            Route::get('/index', [AboutUsController::class, 'index'])->name('about-us.index');
+            Route::post('/new', [AboutUsController::class, 'create'])->name('about-us.new');
         });
 
         Route::prefix('service')->group(function () {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use ZipArchive;
 
 class GeneralSettingController extends Controller
@@ -293,5 +294,14 @@ class GeneralSettingController extends Controller
         updateEnv($data);
 
         return redirect()->back()->with('success', 'SMTP settings updated successfully!');
+    }
+
+    public function unlock(Request $request)
+    {
+        $request->validate(['password' => 'required']);
+        if (Hash::check($request->password, auth()->user()->password)) {
+            return redirect()->route('dashboard')->with('success', 'Welcome back!');
+        }
+        return back()->with('error', 'Invalid password. Please try again.');
     }
 }

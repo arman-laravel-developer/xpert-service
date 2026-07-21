@@ -44,38 +44,60 @@
     </li>
     @endif
 
-    @if ($userType === 1 || !empty(array_filter(['service.index', 'brand.index', 'service-area.index', 'blog-post.index', 'gallery-item.index', 'review.index', 'faq.index'], fn($route) => in_array($route, $roleRoutes))))
+    @if ($userType === 1 || in_array('service.index', $roleRoutes))
     <li class="side-nav-item">
-        <a data-bs-toggle="collapse" href="#sidebarFrontend" aria-expanded="false" aria-controls="sidebarFrontend" class="side-nav-link">
-            <i class="uil-store"></i>
-            <span> Frontend Content </span>
-            <span class="menu-arrow"></span>
+        <a href="{{ route('service.index') }}" class="side-nav-link">
+            <i class="uil-wrench"></i>
+            <span> Services </span>
         </a>
-        <div class="collapse" id="sidebarFrontend">
-            <ul class="side-nav-second-level">
-                @if ($userType === 1 || in_array('service.index', $roleRoutes))
-                    <li><a href="{{ route('service.index') }}">Services</a></li>
-                @endif
-                @if ($userType === 1 || in_array('brand.index', $roleRoutes))
-                    <li><a href="{{ route('brand.index') }}">Brands</a></li>
-                @endif
-                @if ($userType === 1 || in_array('service-area.index', $roleRoutes))
-                    <li><a href="{{ route('service-area.index') }}">Service Areas</a></li>
-                @endif
-                @if ($userType === 1 || in_array('blog-post.index', $roleRoutes))
-                    <li><a href="{{ route('blog-post.index') }}">Blog Posts</a></li>
-                @endif
-                @if ($userType === 1 || in_array('gallery-item.index', $roleRoutes))
-                    <li><a href="{{ route('gallery-item.index') }}">Gallery</a></li>
-                @endif
-                @if ($userType === 1 || in_array('review.index', $roleRoutes))
-                    <li><a href="{{ route('review.index') }}">Reviews</a></li>
-                @endif
-                @if ($userType === 1 || in_array('faq.index', $roleRoutes))
-                    <li><a href="{{ route('faq.index') }}">FAQs</a></li>
-                @endif
-            </ul>
-        </div>
+    </li>
+    @endif
+    @if ($userType === 1 || in_array('brand.index', $roleRoutes))
+    <li class="side-nav-item">
+        <a href="{{ route('brand.index') }}" class="side-nav-link">
+            <i class="uil-tag"></i>
+            <span> Brands </span>
+        </a>
+    </li>
+    @endif
+    @if ($userType === 1 || in_array('service-area.index', $roleRoutes))
+    <li class="side-nav-item">
+        <a href="{{ route('service-area.index') }}" class="side-nav-link">
+            <i class="uil-map-marker"></i>
+            <span> Service Areas </span>
+        </a>
+    </li>
+    @endif
+    @if ($userType === 1 || in_array('blog-post.index', $roleRoutes))
+    <li class="side-nav-item">
+        <a href="{{ route('blog-post.index') }}" class="side-nav-link">
+            <i class="uil-file-alt"></i>
+            <span> Blog Posts </span>
+        </a>
+    </li>
+    @endif
+    @if ($userType === 1 || in_array('gallery-item.index', $roleRoutes))
+    <li class="side-nav-item">
+        <a href="{{ route('gallery-item.index') }}" class="side-nav-link">
+            <i class="uil-images"></i>
+            <span> Gallery </span>
+        </a>
+    </li>
+    @endif
+    @if ($userType === 1 || in_array('review.index', $roleRoutes))
+    <li class="side-nav-item">
+        <a href="{{ route('review.index') }}" class="side-nav-link">
+            <i class="uil-star"></i>
+            <span> Reviews </span>
+        </a>
+    </li>
+    @endif
+    @if ($userType === 1 || in_array('faq.index', $roleRoutes))
+    <li class="side-nav-item">
+        <a href="{{ route('faq.index') }}" class="side-nav-link">
+            <i class="uil-question-circle"></i>
+            <span> FAQs </span>
+        </a>
     </li>
     @endif
 
@@ -99,7 +121,7 @@
         </li>
     @endif
 
-    @if ($userType === 1 || !empty(array_filter(['setting.add', 'setting.smtp'], fn($route) => in_array($route, $roleRoutes))))
+    @if ($userType === 1 || !empty(array_filter(['setting.add', 'setting.smtp', 'about-us.index', 'setting.backup'], fn($route) => in_array($route, $roleRoutes))))
     <li class="side-nav-item">
         <a data-bs-toggle="collapse" href="#sidebarSetup" aria-expanded="false" aria-controls="sidebarSetup" class="side-nav-link">
             <i class="uil-wrench"></i>
@@ -114,8 +136,43 @@
                 @if ($userType === 1 || in_array('setting.smtp', $roleRoutes))
                     <li><a href="{{ route('setting.smtp') }}">SMTP Settings</a></li>
                 @endif
+                @if ($userType === 1 || in_array('about-us.index', $roleRoutes))
+                    <li><a href="{{ route('about-us.index') }}">About Us</a></li>
+                @endif
+                @if ($userType === 1 || in_array('setting.backup', $roleRoutes))
+                    <li><a href="{{ route('setting.backup') }}">Backup</a></li>
+                @endif
             </ul>
         </div>
     </li>
     @endif
+
+    @if ($userType === 1 || !empty(array_filter(['dashboard.contact-form'], fn($route) => in_array($route, $roleRoutes))))
+    <li class="side-nav-item">
+        <a data-bs-toggle="collapse" href="#sidebarSupport" aria-expanded="false" aria-controls="sidebarSupport" class="side-nav-link">
+            <i class="uil-envelope"></i>
+            <span> Support </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarSupport">
+            <ul class="side-nav-second-level">
+                <li><a href="{{ route('dashboard.contact-form') }}">Contact Queries</a></li>
+            </ul>
+        </div>
+    </li>
+    @endif
+
+    <li class="side-nav-item">
+        <a href="{{ route('lock-screen') }}" class="side-nav-link">
+            <i class="uil-lock"></i>
+            <span> Lock Screen </span>
+        </a>
+    </li>
+
+    <li class="side-nav-item">
+        <a href="{{ route('home') }}" target="_blank" class="side-nav-link">
+            <i class="uil-external-link-alt"></i>
+            <span> Visit Website </span>
+        </a>
+    </li>
 </ul>

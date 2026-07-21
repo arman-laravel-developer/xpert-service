@@ -142,19 +142,19 @@
                         </div>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{ route('profile.admin') }}" class="dropdown-item notify-item">
                             <i class="mdi mdi-account-circle me-1"></i>
                             <span>My Account</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{ route('setting.add') }}" class="dropdown-item notify-item">
                             <i class="mdi mdi-account-edit me-1"></i>
                             <span>Settings</span>
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{ route('lock-screen') }}" class="dropdown-item notify-item">
                             <i class="mdi mdi-lock-outline me-1"></i>
                             <span>Lock Screen</span>
                         </a>
