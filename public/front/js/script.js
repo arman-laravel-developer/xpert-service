@@ -3,6 +3,18 @@
    ================================ */
 document.addEventListener('DOMContentLoaded', function () {
 
+  // baguetteBox Gallery Init
+  if (typeof baguetteBox !== 'undefined') {
+    baguetteBox.run('.gallery', {
+      animation: 'slideIn',
+      buttons: true,
+      fullScreen: false,
+      noScrollbars: true,
+      captions: false,
+      async: true
+    });
+  }
+
   // AOS Animation Init
   AOS.init({
     duration: 400,
@@ -22,6 +34,21 @@ document.addEventListener('DOMContentLoaded', function () {
       navbar.classList.remove('navbar-scrolled');
     }
   });
+
+  // Reviews Swiper
+  if (typeof Swiper !== 'undefined' && document.querySelector('.reviewSwiper')) {
+    new Swiper('.reviewSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: { delay: 4000, disableOnInteraction: false },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      breakpoints: {
+        640: { slidesPerView: 2 },
+        992: { slidesPerView: 3 }
+      }
+    });
+  }
 
   // Active nav link on scroll
   const sections = document.querySelectorAll('section[id]');

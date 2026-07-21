@@ -183,10 +183,10 @@
       <h2>আমাদের কাজের নমুনা</h2>
       <p>Before &amp; After – নিজের চোখে দেখুন আমাদের কাজের মান</p>
     </div>
-    <div class="row g-3" data-aos="fade-up">
+    <div class="row g-3 gallery" data-aos="fade-up">
       @foreach($items as $item)
       <div class="col-6 col-md-4 col-lg-3">
-        <a href="{{ asset($item->image) }}" class="gallery-item" data-lightbox="work-gallery">
+        <a href="{{ asset($item->image) }}" class="gallery-item">
           <img src="{{ asset($item->image) }}" alt="{{ $item->alt_text ?? 'Gallery Image' }}">
           <div class="gallery-overlay"><span><i class="fas fa-search-plus"></i></span></div>
         </a>
@@ -202,27 +202,30 @@
       <h2>গ্রাহকরা কী বলছেন</h2>
       <p>আমাদের সেবায় সন্তুষ্ট গ্রাহকদের মতামত</p>
     </div>
-    <div class="row g-4">
-      @foreach($reviews as $review)
-      <div class="col-md-6 col-lg-4" data-aos="fade-up">
-        <div class="review-card">
-          <div class="review-stars">
-            @for($i = 1; $i <= 5; $i++)
-              @if($i <= $review->rating)
-                <i class="fas fa-star"></i>
-              @else
-                <i class="far fa-star"></i>
-              @endif
-            @endfor
-          </div>
-          <p class="review-text">"{{ $review->content }}"</p>
-          <div class="review-author">
-            <div class="review-avatar"><i class="fas fa-user-circle"></i></div>
-            <div><strong>{{ $review->name }}</strong><small>{{ $review->location }}</small></div>
+    <div class="swiper reviewSwiper" data-aos="fade-up">
+      <div class="swiper-wrapper">
+        @foreach($reviews as $review)
+        <div class="swiper-slide">
+          <div class="review-card">
+            <div class="review-stars">
+              @for($i = 1; $i <= 5; $i++)
+                @if($i <= $review->rating)
+                  <i class="fas fa-star"></i>
+                @else
+                  <i class="far fa-star"></i>
+                @endif
+              @endfor
+            </div>
+            <p class="review-text">"{{ $review->content }}"</p>
+            <div class="review-author">
+              <div class="review-avatar"><i class="fas fa-user-circle"></i></div>
+              <div><strong>{{ $review->name }}</strong><small>{{ $review->location }}</small></div>
+            </div>
           </div>
         </div>
+        @endforeach
       </div>
-      @endforeach
+      <div class="swiper-pagination"></div>
     </div>
     <div class="text-center mt-5" data-aos="fade-up">
       <p class="mb-3">Google-এ আমাদের ৪.৮★ রেটিং! আপনিও আপনার মতামত জানান।</p>

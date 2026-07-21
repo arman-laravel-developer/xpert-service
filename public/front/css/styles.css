@@ -435,3 +435,9 @@ aside .list-unstyled li:last-child { border-bottom: none !important; padding-bot
 .brand-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover) !important; border-color: var(--accent) !important; }
 .brand-card img { transition: var(--transition); }
 .brand-card:hover img { transform: scale(1.05); }
+
+/* REVIEWS SWIPER */
+.reviewSwiper .swiper-slide { height: auto; }
+.reviewSwiper .swiper-pagination { position: relative; margin-top: 30px; }
+.reviewSwiper .swiper-pagination-bullet { background: var(--primary); opacity: 0.4; }
+.reviewSwiper .swiper-pagination-bullet-active { opacity: 1; }

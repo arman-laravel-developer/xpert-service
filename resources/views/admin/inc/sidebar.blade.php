@@ -136,12 +136,12 @@
                 @if ($userType === 1 || in_array('setting.smtp', $roleRoutes))
                     <li><a href="{{ route('setting.smtp') }}">SMTP Settings</a></li>
                 @endif
-                @if ($userType === 1 || in_array('about-us.index', $roleRoutes))
+                {{-- @if ($userType === 1 || in_array('about-us.index', $roleRoutes))
                     <li><a href="{{ route('about-us.index') }}">About Us</a></li>
                 @endif
                 @if ($userType === 1 || in_array('setting.backup', $roleRoutes))
                     <li><a href="{{ route('setting.backup') }}">Backup</a></li>
-                @endif
+                @endif --}}
             </ul>
         </div>
     </li>

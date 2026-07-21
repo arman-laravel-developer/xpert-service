@@ -17,6 +17,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.12.0/baguetteBox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('front/css/styles.css') }}">
   @stack('head')
   <link rel="icon" type="image/png" href="{{ asset($generalSettingView->favicon ?? 'front/images/favicon.png') }}">
@@ -129,7 +131,7 @@
         <p class="footer-copyright mb-0">&copy; {{ date('Y') }} {{ $siteName }}. All rights reserved.</p>
       </div>
       <div class="col-md-6 text-center text-md-end">
-        <p class="footer-tagline mb-0">{{ $generalSettingView->site_name ?? '' }} – পেশাদার হোম অ্যাপ্লায়েন্স সার্ভিস</p>
+        <p class="footer-tagline mb-0">Design &amp; Development by <a href="https://armanalibd.com" target="_blank" rel="noopener">MD ARMAN ALI</a></p>
       </div>
     </div>
   </div>
@@ -137,6 +139,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.12.0/baguetteBox.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="{{ asset('front/js/script.js') }}"></script>
 </body>
 </html>
